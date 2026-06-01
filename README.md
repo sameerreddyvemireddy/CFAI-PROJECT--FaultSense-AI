@@ -1,128 +1,92 @@
 # Fault Diagnosis in Industrial Systems Using Deterministic and Probabilistic Reasoning
 
-## Introduction
+## Project Overview
 
-Fault diagnosis is an important process in industrial systems used to detect, identify, and analyze faults in machinery and equipment. Modern industries rely on sensors to monitor parameters such as temperature, pressure, and vibration. However, sensor readings often contain noise and uncertainty, making fault detection challenging.
+This project implements an Intelligent Fault Diagnosis System using core Artificial Intelligence concepts covered in the Computational Foundations for Artificial Intelligence (CFAI) course.
 
-This project develops an intelligent fault diagnosis system that combines rule-based reasoning, search techniques, constraint checking, probabilistic reasoning, and decision-making methods. The system analyzes sensor readings, identifies possible faults, estimates fault probabilities, and recommends appropriate actions.
-
----
-
-## Aim
-
-To design and implement an AI-based fault diagnosis system that uses noisy sensor readings to detect faults and compare deterministic reasoning with probabilistic reasoning for industrial decision-making.
+The system analyzes industrial sensor readings such as temperature, pressure, and vibration to identify potential machine faults. It combines graph search, constraint satisfaction, rule-based reasoning, probabilistic reasoning, and utility-based decision making to provide accurate fault diagnosis and maintenance recommendations.
 
 ---
 
-## Course Outcomes (COs) Used
+## Objectives
 
-### CO1 – Agent Model and Knowledge Representation
+* Represent industrial sensor data as AI state-space models.
+* Perform fault exploration using graph search algorithms.
+* Apply Constraint Satisfaction Problem (CSP) techniques for fault detection.
+* Implement probabilistic reasoning under sensor uncertainty.
+* Use utility-based decision making for maintenance recommendations.
+* Integrate all modules into a complete AI-based fault diagnosis pipeline.
 
-* PEAS-based intelligent agent concept
-* State representation using Python dataclasses
-* Rule-based knowledge representation
-* Use of Python data structures such as lists, dictionaries, and sets
+---
 
-### CO2 – Search Algorithms
+## AI Concepts Used
+
+### CO1 – Problem Formulation & Representation
+
+* State Space Representation
+* PEAS Framework
+* Rule-Based Knowledge Representation
+* Sensor State Modeling
+
+### CO2 – Graph Search Algorithms
 
 * Breadth First Search (BFS)
-* Fault graph exploration
-* State-space traversal for fault discovery
+* Fault Graph Exploration
+* State Space Traversal
 
-### CO3 – Constraint Satisfaction Problems (CSP)
+### CO3 – Constraint Satisfaction Problem (CSP)
 
-* Constraint checking
-* Detection of sensor limit violations
-* Explainable reasoning through constraint failure analysis
+* Constraint Checking
+* Operational Limit Verification
+* Constraint Violation Analysis
 
-### CO4 – Decision Making
+### CO4 – Decision Making Agent
 
-* Utility-based decision selection
-* Action recommendation based on fault severity
-* Rational decision-making under uncertainty
+* Utility-Based Agent
+* Maintenance Action Selection
+* Rational Decision Making
 
-### CO5 – Probabilistic Reasoning
+### CO5 – Reasoning Under Uncertainty
 
-* Bayesian-inspired fault probability estimation
-* Sensor fusion concepts
-* Uncertainty-aware diagnosis
+* Bayesian-Inspired Reasoning
+* Fault Probability Estimation
+* Sensor Uncertainty Handling
 
-### CO6 – Hybrid Intelligent Systems
+### CO6 – Integrated AI Pipeline
 
-* Integration of search, constraints, rules, probability, and decision logic
-* Explainable reasoning trace
-* Performance-oriented fault diagnosis architecture
+* Search + Constraints + Rules + Probability + Decision Making
 
 ---
 
-## Technologies Used
+## Project Structure
 
-* Python 3.x
-* Dataclasses
-* Collections Module (Deque)
-* Typing Module
-* Object-Oriented Programming (OOP)
-* Artificial Intelligence Concepts
-* Rule-Based Systems
-* Graph Search Techniques
+Fault-Diagnosis-AI/
 
----
+├── app.py
 
-## Algorithm
+├── README.md
 
-### Step 1: Input Collection
+├── requirements.txt
 
-Collect sensor readings:
+├── report.pdf
 
-* Temperature
-* Pressure
-* Vibration
+├── screenshots/
 
-### Step 2: Search Analysis
+│   ├── output1.png
 
-Use Breadth First Search (BFS) to explore the fault graph and identify possible fault paths.
-
-### Step 3: Constraint Checking
-
-Verify whether sensor values satisfy predefined operational constraints.
-
-### Step 4: Rule-Based Diagnosis
-
-Apply deterministic rules to identify likely faults.
-
-### Step 5: Probabilistic Diagnosis
-
-Calculate fault probability based on abnormal sensor readings.
-
-### Step 6: Decision Making
-
-Select an appropriate maintenance action using utility-based reasoning.
-
-### Step 7: Generate Reasoning Trace
-
-Provide a transparent explanation of how the final decision was reached.
+│   └── output2.png
 
 ---
 
-## How to Run the Code
+## How to Run
 
-### Prerequisites
-
-Install Python 3.9 or above.
-
-Verify installation:
-
-```bash
-python --version
-```
-
-### Run the Application
-
-Navigate to the project directory and execute:
+Run the application using Python:
 
 ```bash
 python app.py
 ```
+
+If the environment does not support user input, use predefined sensor values inside the code.
 
 ---
 
@@ -130,7 +94,9 @@ python app.py
 
 ```text
 Temperature = 92
+
 Pressure = 45
+
 Vibration = 8.5
 ```
 
@@ -139,19 +105,92 @@ Vibration = 8.5
 ## Example Output
 
 ```text
-======================================
-INDUSTRIAL FAULT DIAGNOSIS SYSTEM
-======================================
+Motor Fault Suspected
 
-Sensor Readings
+Fault Probability = 1.00
 
-Temperature : 92
-Pressure    : 45
-Vibration   : 8.5
+Recommended Action = Emergency Shutdown
 ```
 
 ---
 
-## Conclusion
+## Algorithm
 
-The developed system demonstrates how Artificial Intelligence techniques can be applied to industrial fault diagnosis. By combining deterministic rules, search algorithms, constraint satisfaction, probabilistic reasoning, and utility-based decisions, the system provides reliable and explainable fault detection. The project also illustrates the practical implementation of multiple AI concepts covered throughout the course outcomes.
+1. Read sensor values.
+2. Create a system state representation.
+3. Explore possible faults using BFS.
+4. Check operational constraints.
+5. Apply rule-based diagnosis.
+6. Estimate fault probability.
+7. Select the appropriate maintenance action.
+8. Display diagnosis results.
+9. End.
+
+---
+
+## System Workflow
+
+Sensor Readings
+
+↓
+
+State Representation
+
+↓
+
+BFS Fault Exploration
+
+↓
+
+Constraint Checking
+
+↓
+
+Rule-Based Diagnosis
+
+↓
+
+Probabilistic Reasoning
+
+↓
+
+Utility-Based Decision Making
+
+↓
+
+Maintenance Recommendation
+
+↓
+
+Reasoning Trace
+
+---
+
+## Applications
+
+* Manufacturing Industries
+* Smart Factories
+* Industrial IoT Systems
+* Predictive Maintenance
+* Power Plants
+* Oil and Gas Industries
+* Process Control Systems
+
+---
+
+## Technologies Used
+
+* Python 3.x
+* Artificial Intelligence Algorithms
+* Graph Search Techniques
+* Constraint Satisfaction
+* Probabilistic Reasoning
+* Object-Oriented Programming
+
+---
+
+## Course Details
+
+Course: Computational Foundations for Artificial Intelligence (CFAI)
+
+Project Title: Fault Diagnosis in Industrial Systems Using Deterministic and Probabilistic Reasoning
