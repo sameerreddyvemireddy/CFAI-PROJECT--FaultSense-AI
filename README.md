@@ -1,165 +1,157 @@
-# CFAI-PROJECT--FaultSense-AI
-# FaultSense AI — Industrial Fault Diagnosis System
-## Project 07: Fault Diagnosis in Industrial Systems
+# Fault Diagnosis in Industrial Systems Using Deterministic and Probabilistic Reasoning
 
-### 🚀 Quick Start
+## Introduction
+
+Fault diagnosis is an important process in industrial systems used to detect, identify, and analyze faults in machinery and equipment. Modern industries rely on sensors to monitor parameters such as temperature, pressure, and vibration. However, sensor readings often contain noise and uncertainty, making fault detection challenging.
+
+This project develops an intelligent fault diagnosis system that combines rule-based reasoning, search techniques, constraint checking, probabilistic reasoning, and decision-making methods. The system analyzes sensor readings, identifies possible faults, estimates fault probabilities, and recommends appropriate actions.
+
+---
+
+## Aim
+
+To design and implement an AI-based fault diagnosis system that uses noisy sensor readings to detect faults and compare deterministic reasoning with probabilistic reasoning for industrial decision-making.
+
+---
+
+## Course Outcomes (COs) Used
+
+### CO1 – Agent Model and Knowledge Representation
+
+* PEAS-based intelligent agent concept
+* State representation using Python dataclasses
+* Rule-based knowledge representation
+* Use of Python data structures such as lists, dictionaries, and sets
+
+### CO2 – Search Algorithms
+
+* Breadth First Search (BFS)
+* Fault graph exploration
+* State-space traversal for fault discovery
+
+### CO3 – Constraint Satisfaction Problems (CSP)
+
+* Constraint checking
+* Detection of sensor limit violations
+* Explainable reasoning through constraint failure analysis
+
+### CO4 – Decision Making
+
+* Utility-based decision selection
+* Action recommendation based on fault severity
+* Rational decision-making under uncertainty
+
+### CO5 – Probabilistic Reasoning
+
+* Bayesian-inspired fault probability estimation
+* Sensor fusion concepts
+* Uncertainty-aware diagnosis
+
+### CO6 – Hybrid Intelligent Systems
+
+* Integration of search, constraints, rules, probability, and decision logic
+* Explainable reasoning trace
+* Performance-oriented fault diagnosis architecture
+
+---
+
+## Technologies Used
+
+* Python 3.x
+* Dataclasses
+* Collections Module (Deque)
+* Typing Module
+* Object-Oriented Programming (OOP)
+* Artificial Intelligence Concepts
+* Rule-Based Systems
+* Graph Search Techniques
+
+---
+
+## Algorithm
+
+### Step 1: Input Collection
+
+Collect sensor readings:
+
+* Temperature
+* Pressure
+* Vibration
+
+### Step 2: Search Analysis
+
+Use Breadth First Search (BFS) to explore the fault graph and identify possible fault paths.
+
+### Step 3: Constraint Checking
+
+Verify whether sensor values satisfy predefined operational constraints.
+
+### Step 4: Rule-Based Diagnosis
+
+Apply deterministic rules to identify likely faults.
+
+### Step 5: Probabilistic Diagnosis
+
+Calculate fault probability based on abnormal sensor readings.
+
+### Step 6: Decision Making
+
+Select an appropriate maintenance action using utility-based reasoning.
+
+### Step 7: Generate Reasoning Trace
+
+Provide a transparent explanation of how the final decision was reached.
+
+---
+
+## How to Run the Code
+
+### Prerequisites
+
+Install Python 3.9 or above.
+
+Verify installation:
 
 ```bash
-# 1. Install dependencies
-python3 -m pip install flask flask-cors
-
-# 2. Run the application
-python3 app.py
-
-# 3. Open in browser
-open http://localhost:5002
+python --version
 ```
 
-The system will start automatically and you can access it at **http://localhost:5000**
+### Run the Application
 
----
+Navigate to the project directory and execute:
 
-## 📚 System Architecture (CO1-CO6)
-
-### CO1: Agent Model & Knowledge Representation
-- **PEAS Analysis**: Performance measure, Environment, Actuators, Sensors
-- **Environment Properties**: Partially observable, stochastic, sequential, dynamic
-- **State Representation**: Dataclass-based fault states with proper typing
-- **Knowledge Graph**: Industrial fault state space with 12 states
-- **Sensors**: Temperature, Pressure, Vibration, Current, Voltage (with Gaussian noise)
-
-### CO2: Search Algorithm
-- **Algorithm**: A* Search (Optimal + Complete)
-- **Heuristic**: Euclidean distance in normalized sensor space (Admissible & Consistent)
-- **Properties**: 
-  - Time Complexity: O(b^d)
-  - Space Complexity: O(b^d)
-  - Optimal path guaranteed with admissible heuristic
-- **Features**: 
-  - Open/Closed set management
-  - f(n) = g(n) + h(n) evaluation
-  - Step-by-step execution trace
-
-### CO3: Constraint Satisfaction
-- Fault state constraints encoded in graph structure
-- State transitions follow physical causality rules
-- Goal states: Terminal fault diagnoses or NORMAL operation
-
-### CO5: Probabilistic Reasoning
-- Sensor noise simulation (Gaussian distribution)
-- Sensor fusion through multi-dimensional state space
-- Uncertainty handling in diagnosis
-
-### CO6: Hybrid Architecture
-- Combines search (A*) + knowledge representation (graph)
-- Explainable step-by-step traces
-- Clear severity classification (CRITICAL, MAJOR, NORMAL)
-
----
-
-## 🎮 How to Use
-
-### 1. **Sensor Input**
-   - Adjust the 5 sensor sliders (Temperature, Pressure, Vibration, Current, Voltage)
-   - Add sensor noise (0-20%) to simulate real-world measurement errors
-   - Use **Quick Presets** for common fault scenarios
-
-### 2. **Run Diagnosis**
-   - Click "⚡ Run Diagnosis" button
-   - Watch the A* algorithm explore the fault state space
-
-### 3. **Interpret Results**
-   - **Severity Level**: Shows CRITICAL/MAJOR/NORMAL status
-   - **Fault State**: The identified fault (e.g., OVERHEATING, PUMP_FAILURE)
-   - **Description**: What's wrong and recommended action
-   - **Path Taken**: The sequence of states explored
-   - **Statistics**: Nodes expanded, path cost
-
-### 4. **Step-by-Step Trace**
-   - See exactly how A* algorithm works
-   - Track frontier size and closed set growth
-   - Understand heuristic evaluation at each step
-
----
-
-## 📋 Fault Scenarios
-
-| Scenario | Fault | Severity |
-|----------|-------|----------|
-| **Normal** | System Operating Normally | ✓ NORMAL |
-| **Overheating** | Extreme temperature (>90°C) | ⚠️ CRITICAL |
-| **Pump Failure** | No pressure, pump not responding | ⚠️ CRITICAL |
-| **Bearing Wear** | High vibration, elevated temperature | ⚠️ MAJOR |
-| **Coolant Leak** | High temp + low pressure | ⚠️ CRITICAL |
-
----
-
-## 🔧 Project Structure
-
-```
-fault_diagnosis/
-├── app.py                    # Flask backend (A* search, CO1-CO6)
-├── requirements.txt          # Python dependencies
-├── README.md                 # This file
-└── templates/
-    ├── index.html           # Main UI (clean, educational)
-    └── index_old.html       # Previous version (backup)
+```bash
+python app.py
 ```
 
 ---
 
-## 🧠 Algorithm Details
+## Example Input
 
-### A* Search Implementation
-1. **Initialization**: Start node with g(n)=0, h(n)=heuristic(START)
-2. **Frontier**: Priority queue ordered by f(n) = g(n) + h(n)
-3. **Expansion**: Pop lowest f(n) node, add successors to frontier
-4. **Goal Test**: When dequeued node is in GOAL_STATES
-5. **Termination**: Path reconstruction or failure
-
-### Admissible Heuristic
-- Uses Euclidean distance in normalized sensor space
-- Never overestimates true cost
-- Guarantees optimal solution
+```text
+Temperature = 92
+Pressure = 45
+Vibration = 8.5
+```
 
 ---
 
-## 📊 Features
+## Example Output
 
-✅ **A* Search Algorithm** - Optimal, complete search  
-✅ **Sensor Noise Simulation** - Realistic uncertainty  
-✅ **Step-by-Step Visualization** - See algorithm execution  
-✅ **Quick Presets** - Test predefined scenarios  
-✅ **Clear Severity Levels** - CRITICAL/MAJOR/NORMAL  
-✅ **Educational Design** - Understand AI at each step  
-✅ **No Algorithm Selector** - A* is the best choice  
+```text
+======================================
+INDUSTRIAL FAULT DIAGNOSIS SYSTEM
+======================================
 
----
+Sensor Readings
 
-## 🛠️ Tech Stack
+Temperature : 92
+Pressure    : 45
+Vibration   : 8.5
 
-- **Backend**: Flask (Python)
-- **Frontend**: Vanilla HTML/CSS/JavaScript
-- **Algorithm**: A* Graph Search
-- **Data Structure**: Priority Queue (heapq), Dataclasses
 
 ---
 
-## 📖 Course Learning Outcomes
+## Conclusion
 
-- Understand PEAS models and environment types
-- Implement informed search algorithms (A*)
-- Design admissible heuristics
-- Work with graphs and state spaces
-- Handle sensor uncertainty
-- Create explainable AI systems
-
----
-
-## 📝 Notes
-
-- The system uses **A* algorithm exclusively** for optimal fault diagnosis
-- Sensor readings support real-time adjustment via sliders
-- Noise level simulates real-world measurement uncertainties
-- All traces show the exact reasoning process
-- Suitable for understanding AI algorithms in practice
+The developed system demonstrates how Artificial Intelligence techniques can be applied to industrial fault diagnosis. By combining deterministic rules, search algorithms, constraint satisfaction, probabilistic reasoning, and utility-based decisions, the system provides reliable and explainable fault detection. The project also illustrates the practical implementation of multiple AI concepts covered throughout the course outcomes.
