@@ -68,13 +68,7 @@ Fault-Diagnosis-AI/
 
 ├── requirements.txt
 
-├── report.pdf
-
-├── screenshots/
-
-│   ├── output1.png
-
-│   └── output2.png
+├── Project_Report.md
 
 ---
 
