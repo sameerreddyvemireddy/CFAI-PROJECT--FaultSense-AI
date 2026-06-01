@@ -148,7 +148,7 @@ Sensor Readings
 Temperature : 92
 Pressure    : 45
 Vibration   : 8.5
-
+```
 
 ---
 
