@@ -110,7 +110,7 @@ Recommended Action = Emergency Shutdown
 
 ## Algorithm
 
-1. Read sensor values.
+```1. Read sensor values.
 2. Create a system state representation.
 3. Explore possible faults using BFS.
 4. Check operational constraints.
@@ -119,7 +119,20 @@ Recommended Action = Emergency Shutdown
 7. Select the appropriate maintenance action.
 8. Display diagnosis results.
 9. End.
+```
 
+---
+
+## Algorithms used
+```
+
+• Breadth First Search (BFS)
+• Constraint Satisfaction (Constraint Checking)
+• Rule-Based Reasoning
+• Probabilistic Fault Estimation
+• Utility-Based Decision Making
+• Hybrid AI Framework
+```
 ---
 
 ## System Workflow
