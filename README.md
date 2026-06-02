@@ -32,29 +32,42 @@ The system analyzes industrial sensor readings such as temperature, pressure, an
 
 * Breadth First Search (BFS)
 * Fault Graph Exploration
-* State Space Traversal
+* Node Traversal and Reasoning Trace
 
 ### CO3 – Constraint Satisfaction Problem (CSP)
 
 * Constraint Checking
-* Operational Limit Verification
-* Constraint Violation Analysis
+* Sensor Threshold Validation
+* Fault Condition Detection
 
 ### CO4 – Decision Making Agent
 
-* Utility-Based Agent
+* Utility-Based Decision Making
 * Maintenance Action Selection
-* Rational Decision Making
+* Risk-Based Recommendations
 
 ### CO5 – Reasoning Under Uncertainty
 
+* Probabilistic Fault Estimation
 * Bayesian-Inspired Reasoning
-* Fault Probability Estimation
 * Sensor Uncertainty Handling
 
 ### CO6 – Integrated AI Pipeline
 
-* Search + Constraints + Rules + Probability + Decision Making
+* Search + CSP + Probabilistic Reasoning + Decision Making
+* Explainable Fault Diagnosis
+* Hybrid AI Architecture
+
+---
+
+## Algorithms Used
+
+* Breadth First Search (BFS)
+* Constraint Satisfaction (Constraint Checking)
+* Rule-Based Reasoning
+* Probabilistic Fault Estimation
+* Utility-Based Decision Making
+* Hybrid AI Framework
 
 ---
 
@@ -64,84 +77,53 @@ Fault-Diagnosis-AI/
 
 ├── app.py
 
-├── README.md
-
 ├── requirements.txt
 
-├── Project_Report.md
+├── README.md
+
+├── report.pdf
+
+├── templates/
+
+│ └── index.html
+
+└── static/
+
+    └── style.css
 
 ---
 
 ## How to Run
 
-Run the application using Python:
+### Step 1: Install Python
+
+Install Python 3.9 or higher.
+
+### Step 2: Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Step 3: Run the Application
 
 ```bash
 python app.py
 ```
 
-If the environment does not support user input, use predefined sensor values inside the code.
+### Step 4: Open the Browser
 
----
-
-## Example Input
+Visit:
 
 ```text
-Temperature = 92
-
-Pressure = 45
-
-Vibration = 8.5
+http://127.0.0.1:5000
 ```
 
----
-
-## Example Output
-
-```text
-Motor Fault Suspected
-
-Fault Probability = 1.00
-
-Recommended Action = Emergency Shutdown
-```
-
----
-
-## Algorithm
-
-```1. Read sensor values.
-2. Create a system state representation.
-3. Explore possible faults using BFS.
-4. Check operational constraints.
-5. Apply rule-based diagnosis.
-6. Estimate fault probability.
-7. Select the appropriate maintenance action.
-8. Display diagnosis results.
-9. End.
-```
-
----
-
-## Algorithms used
-```
-
-• Breadth First Search (BFS)
-• Constraint Satisfaction (Constraint Checking)
-• Rule-Based Reasoning
-• Probabilistic Fault Estimation
-• Utility-Based Decision Making
-• Hybrid AI Framework
-```
 ---
 
 ## System Workflow
 
-Sensor Readings
-
-↓
-
-State Representation
+Sensor Reading
 
 ↓
 
@@ -157,7 +139,7 @@ Rule-Based Diagnosis
 
 ↓
 
-Probabilistic Reasoning
+Probabilistic Fault Estimation
 
 ↓
 
@@ -167,20 +149,36 @@ Utility-Based Decision Making
 
 Maintenance Recommendation
 
-↓
+---
 
-Reasoning Trace
+## Example Input
+
+Temperature = 92°C
+
+Pressure = 45 kPa
+
+Vibration = 8.5 mm/s
+
+---
+
+## Example Output
+
+Diagnosis: Motor Fault Suspected
+
+Status: CRITICAL
+
+Fault Probability: 100%
+
+Recommended Action: Emergency Shutdown
 
 ---
 
 ## Applications
 
-* Manufacturing Industries
-* Smart Factories
-* Industrial IoT Systems
+* Smart Manufacturing
+* Industrial Automation
 * Predictive Maintenance
-* Power Plants
-* Oil and Gas Industries
+* Machine Health Monitoring
 * Process Control Systems
 
 ---
@@ -188,16 +186,24 @@ Reasoning Trace
 ## Technologies Used
 
 * Python 3.x
+* Flask
+* HTML5
+* CSS3
 * Artificial Intelligence Algorithms
+* Rule-Based Systems
 * Graph Search Techniques
-* Constraint Satisfaction
-* Probabilistic Reasoning
-* Object-Oriented Programming
+
+---
+
+## Requirements
+
+* Python 3.9 or Higher
+* Flask 3.1.0
 
 ---
 
 ## Course Details
 
-Course: Computational Foundations for Artificial Intelligence (CFAI)
+**Course:** Computational Foundations for Artificial Intelligence (CFAI)
 
-Project Title: Fault Diagnosis in Industrial Systems Using Deterministic and Probabilistic Reasoning
+**Project Title:** Fault Diagnosis in Industrial Systems Using Deterministic and Probabilistic Reasoning
