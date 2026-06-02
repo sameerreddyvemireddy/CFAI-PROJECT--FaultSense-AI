@@ -1,11 +1,12 @@
-from dataclasses import dataclass
+from flask import Flask, request, render_template_string
 from collections import deque
-from typing import List
+from dataclasses import dataclass
 
+app = Flask(__name__)
 
-# =====================================================
+# ==========================================================
 # CO1 - Agent Model & State Representation
-# =====================================================
+# ==========================================================
 
 @dataclass
 class SensorState:
@@ -14,18 +15,9 @@ class SensorState:
     vibration: float
 
 
-class FaultDiagnosisAgent:
-
-    def perceive(self, state: SensorState):
-        return state
-
-    def act(self, decision: str):
-        print(f"\nRecommended Action: {decision}")
-
-
-# =====================================================
+# ==========================================================
 # CO2 - BFS Search
-# =====================================================
+# ==========================================================
 
 fault_graph = {
     "Sensor Alert": ["Motor Fault", "Bearing Fault", "Leakage Fault"],
@@ -38,56 +30,48 @@ fault_graph = {
 }
 
 
-def bfs(start: str):
+def bfs(start):
     queue = deque([start])
     visited = set()
-
-    discovered = []
+    traversal = []
 
     while queue:
         node = queue.popleft()
 
         if node not in visited:
             visited.add(node)
-            discovered.append(node)
+            traversal.append(node)
 
             for neighbor in fault_graph[node]:
                 queue.append(neighbor)
 
-    return discovered
+    return traversal
 
 
-# =====================================================
+# ==========================================================
 # CO3 - Constraint Satisfaction
-# =====================================================
+# ==========================================================
 
-def check_constraints(state: SensorState):
-
+def check_constraints(state):
     violations = []
 
     if state.temperature > 80:
-        violations.append(
-            f"Temperature exceeded limit (80): {state.temperature}"
-        )
+        violations.append("Temperature exceeds safe limit (80°C)")
 
     if state.pressure < 50:
-        violations.append(
-            f"Pressure below limit (50): {state.pressure}"
-        )
+        violations.append("Pressure below safe limit (50 kPa)")
 
     if state.vibration > 7:
-        violations.append(
-            f"Vibration exceeded limit (7): {state.vibration}"
-        )
+        violations.append("Vibration exceeds safe limit (7 mm/s)")
 
     return violations
 
 
-# =====================================================
+# ==========================================================
 # CO5 - Probabilistic Reasoning
-# =====================================================
+# ==========================================================
 
-def fault_probability(state: SensorState):
+def calculate_fault_probability(state):
 
     probability = 0.10
 
@@ -103,133 +87,309 @@ def fault_probability(state: SensorState):
     return min(probability, 1.0)
 
 
-# =====================================================
-# CO4 - Utility Based Decision
-# =====================================================
-
-utilities = {
-    "Continue Operation": -100,
-    "Inspect Machine": 50,
-    "Emergency Shutdown": 100
-}
-
+# ==========================================================
+# CO4 - Utility Decision Making
+# ==========================================================
 
 def choose_action(probability):
 
-    if probability >= 0.8:
+    if probability >= 0.80:
         return "Emergency Shutdown"
 
-    elif probability >= 0.4:
+    elif probability >= 0.40:
         return "Inspect Machine"
 
     return "Continue Operation"
 
 
-# =====================================================
-# CO6 - Hybrid Fault Diagnosis System
-# =====================================================
+# ==========================================================
+# CO6 - Hybrid Diagnosis System
+# ==========================================================
 
-def diagnose(state: SensorState):
+HTML = """
+<!DOCTYPE html>
+<html>
+<head>
+<title>Industrial Fault Diagnosis System</title>
 
-    print("\n======================================")
-    print(" INDUSTRIAL FAULT DIAGNOSIS SYSTEM ")
-    print("======================================")
+<style>
 
-    print("\nSensor Readings")
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
 
-    print(f"Temperature : {state.temperature}")
-    print(f"Pressure    : {state.pressure}")
-    print(f"Vibration   : {state.vibration}")
+body{
+background:linear-gradient(135deg,#0f172a,#1e293b);
+min-height:100vh;
+padding:40px;
+color:white;
+}
 
-    print("\n----- STEP 1 : Search Analysis (BFS) -----")
+.container{
+max-width:900px;
+margin:auto;
+}
 
-    search_trace = bfs("Sensor Alert")
+.header{
+text-align:center;
+margin-bottom:30px;
+}
 
-    for item in search_trace:
-        print(item)
+.header h1{
+font-size:40px;
+margin-bottom:10px;
+}
 
-    print("\n----- STEP 2 : Constraint Checking -----")
+.header p{
+color:#cbd5e1;
+}
 
-    violations = check_constraints(state)
+.card{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(10px);
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+margin-bottom:20px;
+}
 
-    if violations:
+.input-group{
+margin-bottom:20px;
+}
 
-        for violation in violations:
-            print(violation)
+label{
+display:block;
+margin-bottom:8px;
+}
 
-    else:
-        print("No constraint violations detected.")
+input{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+font-size:16px;
+}
 
-    print("\n----- STEP 3 : Rule-Based Diagnosis -----")
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+background:#2563eb;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
 
-    if state.temperature > 80 and state.vibration > 7:
-        rule_result = "Motor Fault Suspected"
+button:hover{
+background:#1d4ed8;
+}
 
-    elif state.pressure < 50:
-        rule_result = "Leakage Fault Suspected"
+.result{
+margin-top:20px;
+}
 
-    else:
-        rule_result = "System Normal"
+.info{
+background:#1e293b;
+padding:12px;
+border-radius:10px;
+margin:10px 0;
+}
 
-    print(rule_result)
+.progress{
+width:100%;
+height:30px;
+background:#334155;
+border-radius:20px;
+overflow:hidden;
+margin-top:10px;
+margin-bottom:20px;
+}
 
-    print("\n----- STEP 4 : Probabilistic Diagnosis -----")
+.progress-fill{
+height:100%;
+background:linear-gradient(90deg,#22c55e,#eab308,#ef4444);
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+}
 
-    probability = fault_probability(state)
+.node{
+display:inline-block;
+padding:8px 15px;
+background:#3b82f6;
+border-radius:20px;
+margin:5px;
+}
 
-    print(f"Fault Probability = {probability:.2f}")
+ul{
+margin-left:20px;
+margin-top:10px;
+}
 
-    print("\n----- STEP 5 : Utility Decision -----")
+.status{
+font-size:18px;
+font-weight:bold;
+}
 
-    action = choose_action(probability)
+</style>
 
-    print(f"Selected Action = {action}")
+</head>
 
-    print("\n----- REASONING TRACE -----")
+<body>
 
-    print("1. Sensor values received")
-    print("2. Search graph explored")
-    print("3. Constraints evaluated")
-    print("4. Rules applied")
-    print("5. Probability estimated")
-    print("6. Utility-based decision selected")
+<div class="container">
 
-    print("\n======================================")
+<div class="header">
+<h1>Industrial Fault Diagnosis System</h1>
+<p>AI-Based Fault Detection using Search, CSP, Probability and Decision Making</p>
+</div>
 
-    return action
+<div class="card">
+
+<form method="POST">
+
+<div class="input-group">
+<label>🌡 Temperature (°C)</label>
+<input type="number" step="any" name="temperature" required>
+</div>
+
+<div class="input-group">
+<label>⚙ Pressure (kPa)</label>
+<input type="number" step="any" name="pressure" required>
+</div>
+
+<div class="input-group">
+<label>📈 Vibration (mm/s)</label>
+<input type="number" step="any" name="vibration" required>
+</div>
+
+<button type="submit">Run Diagnosis</button>
+
+</form>
+
+</div>
+
+{% if result %}
+
+<div class="card result">
+
+<h2>Diagnosis Report</h2>
+
+<div class="info">
+<strong>Diagnosis:</strong> {{ result.diagnosis }}
+</div>
+
+<div class="info">
+<strong>Fault Probability:</strong> {{ result.probability }}
+</div>
+
+<div class="progress">
+<div class="progress-fill"
+style="width: {{ result.probability * 100 }}%">
+{{ (result.probability * 100)|round(0) }}%
+</div>
+</div>
+
+<div class="info">
+<strong>System Status:</strong>
+<span class="status">{{ result.status }}</span>
+</div>
+
+<div class="info">
+<strong>Recommended Action:</strong> {{ result.action }}
+</div>
+
+<h3>Constraint Violations</h3>
+
+{% if result.violations %}
+<ul>
+{% for v in result.violations %}
+<li>{{ v }}</li>
+{% endfor %}
+</ul>
+{% else %}
+<p>No violations detected.</p>
+{% endif %}
+
+<br>
+
+<h3>BFS Fault Exploration</h3>
+
+{% for node in result.bfs %}
+<span class="node">{{ node }}</span>
+{% endfor %}
+
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>
+"""
 
 
-# =====================================================
-# MAIN
-# =====================================================
+@app.route("/", methods=["GET", "POST"])
+def home():
 
-def main():
+    result = None
 
-    print("Industrial Fault Diagnosis System")
+    if request.method == "POST":
 
-    try:
-
-        temp = float(input("Enter Temperature: "))
-        pressure = float(input("Enter Pressure: "))
-        vibration = float(input("Enter Vibration: "))
+        temperature = float(request.form["temperature"])
+        pressure = float(request.form["pressure"])
+        vibration = float(request.form["vibration"])
 
         state = SensorState(
-            temperature=temp,
-            pressure=pressure,
-            vibration=vibration
+            temperature,
+            pressure,
+            vibration
         )
 
-        agent = FaultDiagnosisAgent()
+        violations = check_constraints(state)
 
-        perceived_state = agent.perceive(state)
+        bfs_result = bfs("Sensor Alert")
 
-        decision = diagnose(perceived_state)
+        if temperature > 80 and vibration > 7:
+            diagnosis = "Motor Fault Suspected"
 
-        agent.act(decision)
+        elif pressure < 50:
+            diagnosis = "Leakage Fault Suspected"
 
-    except ValueError:
-        print("Invalid input. Please enter numeric values.")
+        else:
+            diagnosis = "System Operating Normally"
+
+        probability = calculate_fault_probability(state)
+
+        action = choose_action(probability)
+
+        if probability >= 0.80:
+            status = "CRITICAL"
+        elif probability >= 0.40:
+            status = "WARNING"
+        else:
+            status = "HEALTHY"
+
+        result = {
+            "diagnosis": diagnosis,
+            "probability": round(probability, 2),
+            "action": action,
+            "violations": violations,
+            "bfs": bfs_result,
+            "status": status
+        }
+
+    return render_template_string(
+        HTML,
+        result=result
+    )
 
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True)
